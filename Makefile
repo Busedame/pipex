@@ -35,7 +35,7 @@ NAME=pipex
 
 all:	$(NAME)
 
-# Compiling the object files and making an executable.
+# Compiling the object files, creating an infile and an outfile, and making an executable.
 $(NAME):	$(OBJ)
 			@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 			@touch infile
