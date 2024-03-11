@@ -6,7 +6,7 @@
 /*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:52:45 by nholbroo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:23:32 by nholbroo         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:57:22 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	print_error_first_child(t_list *pipex, int error_code);
 void	print_error_second_child(t_list *pipex, int error_code);
 void	execution_error(char **flags, char *path, int i);
 void	error_invalid_command(t_list *pipex, char **flags, char *path, int i);
+void	ft_strjoin_error(t_list *pipex, char **flags, int i);
 
 // Standard functions
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

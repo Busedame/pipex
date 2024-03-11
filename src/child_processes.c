@@ -6,7 +6,7 @@
 /*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 14:46:27 by nholbroo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:32:47 by nholbroo         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:38:05 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,24 @@ void	executing_second_child_process(t_list *pipex, char *envp[])
 	path = NULL;
 	i = 0;
 	flags = ft_split(pipex->argv[3], ' ');
+	if (!flags)
+		print_error_second_child(pipex, 6);
 	initialize_commands(pipex, &flags[0], 2);
 	while (pipex->path_names[i])
 	{
 		if (path)
 			ft_free(path);
-		path = ft_strjoin(pipex->path_names[i], pipex->cmd2);
+		path = ft_strjoin(pipex->path_names[i++], pipex->cmd2);
+		if (!path)
+			ft_strjoin_error(pipex, flags, 1);
 		if (access(path, X_OK) == 0)
 			break ;
-		i++;
 	}
 	if (access(path, X_OK) == -1)
 		error_invalid_command(pipex, flags, path, 2);
 	free_all(pipex);
-	if (execve(path, flags, envp) == -1)
-		execution_error(flags, path, 2);
+	execve(path, flags, envp);
+	execution_error(flags, path, 2);
 }
 
 void	executing_first_child_process(t_list *pipex, char *envp[])
@@ -55,21 +58,24 @@ void	executing_first_child_process(t_list *pipex, char *envp[])
 	path = NULL;
 	i = 0;
 	flags = ft_split(pipex->argv[2], ' ');
+	if (!flags)
+		print_error_first_child(pipex, 6);
 	initialize_commands(pipex, &flags[0], 1);
 	while (pipex->path_names[i])
 	{
 		if (path)
 			ft_free(path);
-		path = ft_strjoin(pipex->path_names[i], pipex->cmd1);
+		path = ft_strjoin(pipex->path_names[i++], pipex->cmd1);
+		if (!path)
+			ft_strjoin_error(pipex, flags, 1);
 		if (access(path, X_OK) == 0)
 			break ;
-		i++;
 	}
 	if (access(path, X_OK) == -1)
 		error_invalid_command(pipex, flags, path, 1);
 	free_all(pipex);
-	if (execve(path, flags, envp) == -1)
-		execution_error(flags, path, 1);
+	execve(path, flags, envp);
+	execution_error(flags, path, 1);
 }
 
 void	first_child_process(t_list *pipex, char *envp[], pid_t pid)

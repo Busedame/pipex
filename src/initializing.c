@@ -6,7 +6,7 @@
 /*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:51:17 by nholbroo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:27:49 by nholbroo         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:57:33 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ int	check_file_exist(char *argv[])
 {
 	if (access(argv[1], F_OK) == -1 || access(argv[4], F_OK == -1))
 	{
-		if (access(argv[1], F_OK) == -1)
-			perror("Error: First file does not exist");
 		if (access(argv[4], F_OK) == -1)
-		{
 			open(argv[4], O_CREAT);
-			perror("Second file does not exist (File created)");
+		if (access(argv[1], F_OK) == -1)
+		{
+			perror("Error: First file does not exist");
+			return (-1);
 		}
-		return (-1);
 	}
 	return (0);
 }

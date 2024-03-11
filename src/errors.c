@@ -6,7 +6,7 @@
 /*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:51:57 by nholbroo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:31:19 by nholbroo         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:58:33 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	print_error_first_child(t_list *pipex, int error_code)
 		perror("Error: Could not redirect output in first child\n");
 	else if (error_code == 5)
 		perror("Error: Could not close other side of pipe in first child\n");
+	else if (error_code == 6)
+		perror("Error: Something went wrong with ft_split in first child\n");
 	free_all(pipex);
 	exit(1);
 }
@@ -48,6 +50,8 @@ void	print_error_second_child(t_list *pipex, int error_code)
 		perror("Error: Could not redirect output in second child\n");
 	else if (error_code == 5)
 		perror("Error: Could not close other side of pipe in second child\n");
+	else if (error_code == 6)
+		perror("Error: Something went wrong with ft_split in second child\n");
 	free_all(pipex);
 	exit(1);
 }

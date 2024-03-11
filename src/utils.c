@@ -6,7 +6,7 @@
 /*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:25 by nholbroo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:30:28 by nholbroo         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:57:32 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strjoin_cat_part(s1, s2, result);
 	return (result);
+}
+
+void	ft_strjoin_error(t_list *pipex, char **flags, int i)
+{
+	if (i == 1)
+		perror("Error: Something went wrong with ft_strjoin in first child\n");
+	else if (i == 2)
+		perror("Error: Something went wrong with ft_strjoin in second child\n");
+	ft_freearray(flags);
+	free_all (pipex);
+	exit(1);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
