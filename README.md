@@ -48,8 +48,9 @@ whole process?
 
 **Child and parent processes**  
 When a program is ran, it is one process. You can see it as a **parent process/main process**, or whatever you would like
-to call it. In order to avoid that `execve()` takes over our whole program - we can create a **child process**. Instead of
-calling `execve()` in the parent process, we call it in a child process instead, ensuring that our main process continues
+to call it. In order to avoid that `execve()` takes over our whole program - we can create a **child process**. You can think of it
+as a kind of parallel universe -- the processes are very similar, but will probably do different operations.  
+Instead of calling `execve()` in the parent process, we call it in a child process, ensuring that our main process continues
 running.
 - **Parent process**: The "main" process - which can creates one or more child processes. It controls and monitors them, often waiting for their execution to complete.
 - **Child process**: A process created by a parent process. It is a copy of the parent, but the parent and child have separate memory spaces. Changes (like variables, memory, execution) made in the child process will not affect the parent process.  
@@ -58,8 +59,43 @@ Even though the parent and child are running quite independently from one anothe
 - If they use inter-process communication (IPC) (e.g., signals), they can affect each other.
 - If they share resources (e.g., files, pipes), changes in one process can be visible to both.  
 
-Since we want to execute two commands and they are dependent of each other (as we will see in a little bit), we need 
-to understand the concept of pipes.  
+Now, how do we create a child process? This is done by calling the following function:
+```bash
+	pid_t fork(void);
+```
+`pid_t`: `fork()` returns the process ID. This is a crucial value, to be able to distinguish between a child and parent process.
+As the program moves on after the `fork()` function is called, we most likely don't want the parent and child to do the
+same thing.  
+This is how we can read the return value from `fork()`:
+- `0`: This is a child process.
+- `>0`: This is a parent process (because the value is the pid of the child).  
+- `-1`: An error occured (no child process is created). Errno is set appropriately.
+
+To make it less cryptic:
+```bash
+int	main()
+{
+	pid_t	pid; // Stores the process ID.
+
+	pid = fork(); // Creates the child process.
+	if (!pid)
+			printf("This is a child process.\n");
+	else if (pid > 0)
+			printf("This is the parent process. The created child has pid: %d\n", pid);
+	else
+	{
+			fprintf(stderr, "Something went wrong.\n");
+			return (1);
+	}
+	return (0);
+}
+```
+If we run this example, it will give us this output:
+```bash
+	$> ./a.out 
+	This is the parent process. The created child has pid: 28566
+	This is a child process.   
+```
 
 **Piping**  
 A pipe `|` can be seen as a one-way communication channel between processes. It has two ends - one for reading
