@@ -26,10 +26,9 @@ $>  < file1 cmd1 | cmd2 > file2
 - `file2` The output file. Where is the output of the program redirected to. It should be the name of the file, e.g. "outfile".
 
 **Running a command in C**  
-A shell command is a binary file/an executable, and can essentially be seen as a program.
-`cat`, `grep`, `awk` -- the list of shell commands is definitely long. When I started working with Pipex, I had a moment of
-being scared that I would have to recode all the shell commands. I was happy when I discovered that this was not the case,
-and that there is a function that takes care of all of this for you.  
+A shell command is a binary file/an executable, and can essentially be seen as a program. `cat`, `grep`, `awk` -- are only a few of many shell commands.  
+When I started working with Pipex, I had a moment of being scared that I would have to recode all the shell commands. I was happy when
+I discovered that this was not the case, and that there is a function that takes care of all of this for you.  
 The function is declared like this:
 ```bash
 	int execve(const char *pathname, char *const argv[], char *const envp[]);
