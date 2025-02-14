@@ -2,8 +2,10 @@
 
 **In this README:**
 1. Introduction to the project
-2. What is redirection and piping?
+2. Running a command in C
 3. Child and parent processes
+4. Piping
+5. Redirection
 4. Included files
 5. Cloning the repository
 6. How to compile and run
