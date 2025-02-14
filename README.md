@@ -45,7 +45,10 @@ int	main()
 	fprintf(stderr, "You are too old\n");
 }
 ```
-Output is "Enter your age". User is prompted to input their name (in the terminal) "You are too old" is written to stderr:
+In this example:
+- Output is "Enter your age". 
+- User is prompted to input their name (in the terminal).
+- "You are too old" is written to stderr.
 ```bash
 	$> Enter your age: 42
 	$> You are too old
