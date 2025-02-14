@@ -75,8 +75,10 @@ An example of how to use it:
 	input = open(pipex->argv[1], O_RDONLY); // file1 is opened and given an fd(3).
 	if (dup2(input, STDIN_FILENO) == -1) // Input source is redirected from stdin(0) to fd(3).
 		print_error_first_child(pipex, 3);
-	// Now, the program uses file1 as input instead of the terminal.
+	// Now, file1 has fd(0) instead of fd(3), and will be used as input.
 ```
+
+
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
 of each other. Think of a stack of plates. You would only be able to remove the
