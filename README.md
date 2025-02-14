@@ -28,7 +28,7 @@ $>  < file1 cmd1 | cmd2 > file2
 **What is a file descriptor?**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
 When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.  
-Standard output (1) is used by `printf()`, standard input (0) is used by `scanf()`.
+By default -- standard output (1) is used by `printf()`, and standard input (0) is used by `scanf()`.
 
 - **Standard input (STDIN, 0)** is the input from the keyboard - or typically what you write in the terminal while a program is running. The program
 *reads* from the input.  
