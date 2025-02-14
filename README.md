@@ -2,7 +2,7 @@
 
 **In this README:**
 1. Introduction to the project
-2. What is piping and redirection?
+2. What is redirection and piping?
 3. Child and parent processes
 4. Included files
 5. Cloning the repository
@@ -57,7 +57,7 @@ In C, if you want to open more file descriptors - like a file "test.txt" - it ha
 This function essentially connects the file and the file descriptor.  
 Each opened file will get its unique fd. Since 0, 1 and 2 are reserved for stdin, stdout and stderr - the first opened file will have fd=3, next one fd=4, etc.  
 
-**Redirecting the file descriptors**
+**Redirecting the file descriptors**  
 So we know that file descriptors 0, 1 and 2 are already reserved by default, and that if you open a new file, it will be assigned different file descriptor values.
 What if I told you there is a way to *replace* fd 0, 1 and 2 with a file of your choice?
 Redirection involves telling the operating system, "Hey! Instead of reading from the terminal, read from this file instead!". Or "Write everything I print with printf
@@ -75,10 +75,23 @@ An example of how to use it:
 	input = open(pipex->argv[1], O_RDONLY); // file1 is opened and given an fd(3).
 	if (dup2(input, STDIN_FILENO) == -1) // Input source is redirected from stdin(0) to fd(3).
 		print_error_first_child(pipex, 3);
-	// Now, file1 has fd(0) instead of fd(3), and will be used as input.
+	// Now, file1 has fd(0) instead of fd(3), and the file will be used as input.
 ```
 
+**Piping**
+A pipe `|` can be seen as a one-way communication channel. It has two ends - one for reading
+and one for writing.  
+The process can be seen as follows:
+```bash
+	1. Data gets written into the write-end (fd[1]).
+	2. The data can be read by the read-end (fd[0]).
 
+	Example:
+	ls | wc -l
+
+	ls -> Writes a list into fd[1] of the files/directories in the current directory.
+	wc -l -> Reads the output of 'ls' fd[0], and counts how many lines this consists of, and outputs this.
+```
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
 of each other. Think of a stack of plates. You would only be able to remove the
