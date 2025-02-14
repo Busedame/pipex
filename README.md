@@ -148,7 +148,7 @@ int	main()
 In this example:
 - Output is "Enter your age". 
 - User is prompted to input their age (in the terminal).
-- "You are too old" is written to stderr.
+- "You are too old" is output to stderr.
 ```bash
 	$> Enter your age: 42
 	$> You are too old
