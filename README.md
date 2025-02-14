@@ -62,8 +62,14 @@ to understand the concept of pipes.
 **Piping**  
 A pipe `|` can be seen as a one-way communication channel between processes. It has two ends - one for reading
 and one for writing. In the context of two commands (e.g. `ls | wc -l`), the pipe uses the output of `ls` as input
-for `wc -l`.
-The process can be seen as follows:
+for `wc -l`.  
+In C, a pipe can be created like this:
+```bash
+	int	fd[2];
+
+	pipe(fd); // A pipe gets created for fd, fd[1] is the write-end, and fd[0] is the read-end.
+```
+The pipe process can be seen as follows:
 ```bash
 	cmd1 ---> fd[1] ---> fd[0] ---> cmd2
 
@@ -78,9 +84,9 @@ The process can be seen as follows:
 	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as 
 	input to count how many lines this consists of, and outputs this.
 ```
-A pipe makes communication between two processes possible. However, when you create
-a program in C, there will by default be one process happening. This is unproblematic in
-many cases, but in the context of `pipex`.
+We now know that we can execute our commands using `execve()`, and that it has to be done inside child processes.
+We also know that we can connect the two commands by creating a pipe.  
+But in order for pipex to work exactly like we want, we still need to handle the two files - the input and output file.  
 
 **What is a file descriptor?**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
