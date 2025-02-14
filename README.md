@@ -124,9 +124,6 @@ The pipe process can be seen as follows:
 	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as 
 	input to count how many lines this consists of, and outputs this.
 ```
-We now know that we can execute our commands using `execve()`, and that it has to be done inside child processes.
-We also know that we can connect the two commands by creating a pipe.  
-But in order for pipex to work exactly like we want, we still need to handle the two files - the input and output file.  
 
 **What is a file descriptor?**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
