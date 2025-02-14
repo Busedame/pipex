@@ -27,7 +27,7 @@ $>  < file1 cmd1 | cmd2 > file2
 
 **What is a file descriptor?**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
-When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.  
+When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.
 By default -- standard output (1) is used by `printf()`, and standard input (0) is used by `scanf()`.
 
 - **Standard input (STDIN, 0)** is the input from the keyboard - or typically what you write in the terminal while a program is running. The program
@@ -53,6 +53,10 @@ In this example:
 	$> Enter your age: 42
 	$> You are too old
 ```
+In C, if you want to open more file descriptors - like a file "test.txt" - it has to be opened using the `open()` function from <fcntl.h>.
+This function essentially connects the file and the file descriptor. Each opened file will get an fd, and since 0, 1 and 2 are reserved for
+stdin, stdout and stderr - the first opened file will have fd=3, next one fd=4, etc. 
+
 **Redirecting the file descriptors**
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
