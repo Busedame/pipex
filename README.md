@@ -54,10 +54,29 @@ In this example:
 	$> You are too old
 ```
 In C, if you want to open more file descriptors - like a file "test.txt" - it has to be opened using the `open()` function from <fcntl.h>.
-This function essentially connects the file and the file descriptor. Each opened file will get an fd, and since 0, 1 and 2 are reserved for
-stdin, stdout and stderr - the first opened file will have fd=3, next one fd=4, etc. 
+This function essentially connects the file and the file descriptor.  
+Each opened file will get its unique fd. Since 0, 1 and 2 are reserved for stdin, stdout and stderr - the first opened file will have fd=3, next one fd=4, etc.  
 
 **Redirecting the file descriptors**
+So we know that file descriptors 0, 1 and 2 are already reserved by default, and that if you open a new file, it will be assigned different file descriptor values.
+What if I told you there is a way to *replace* fd 0, 1 and 2 with a file of your choice?
+Redirection involves telling the operating system, "Hey! Instead of reading from the terminal, read from this file instead!". Or "Write everything I print with printf
+to this file, instead of to the terminal!".  
+
+To achieve this, you can use the `dup2()` function from <unistd.h>.
+It is declared like this:
+```bash
+	int dup2(int oldfd, int newfd);
+```
+An example of how to use it:
+```bash
+	int		input;
+
+	input = open(pipex->argv[1], O_RDONLY); // file1 is opened and given an fd(3).
+	if (dup2(input, STDIN_FILENO) == -1) // Input source is redirected from stdin(0) to fd(3).
+		print_error_first_child(pipex, 3);
+	// Now, the program uses file1 as input instead of the terminal.
+```
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
 of each other. Think of a stack of plates. You would only be able to remove the
