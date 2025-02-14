@@ -54,7 +54,10 @@ running.
 
 Even though the parent and child are running quite independently from one another, there are some exceptions:
 - If they use inter-process communication (IPC) (e.g., signals), they can affect each other.
-- If they share resources (e.g., files, pipes), changes in one process can be visible to both.
+- If they share resources (e.g., files, pipes), changes in one process can be visible to both.  
+
+Since we want to execute two commands and they are dependent of each other (as we will see in a little bit), we need 
+to understand the concept of pipes.  
 
 **Piping**  
 A pipe `|` can be seen as a one-way communication channel between processes. It has two ends - one for reading
