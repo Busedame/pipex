@@ -168,14 +168,14 @@ It is declared like this:
 ```bash
 	int dup2(int oldfd, int newfd);
 ```
-An example of how to use it:
+An example of how to use it (redirecting input):
 ```bash
 	int		input;
 
-	input = open(pipex->argv[1], O_RDONLY); // file1 is opened and given an fd(3).
-	if (dup2(input, STDIN_FILENO) == -1) // Input source is redirected from stdin(0) to fd(3).
+	input = open(pipex->argv[1], O_RDONLY); // file1 is opened and given input is set to 3.
+	if (dup2(input, STDIN_FILENO) == -1) // Input source is redirected from stdin (fd=0) to input (fd=3).
 		print_error_first_child(pipex, 3);
-	// Now, file1 has fd(0) instead of fd(3), and the file will be used as input.
+	// Now, file1 has fd=0 instead of fd=3, and the file will be used as input instead of stdin.
 ```
 
 ---
