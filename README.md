@@ -26,8 +26,30 @@ $>  < file1 cmd1 | cmd2 > file2
 - `file2` The output file. Where is the output of the program redirected to. It should be the name of the file, e.g. "outfile".
 
 **What is a file descriptor?**
-The input and output of a program is by default set to standard input and standard output. Standard input (STDIN, 0) is the input from the keyboard - or typically what you write in the terminal while a program is running. Standard output (STDOUT, 1) is the output - which gets printed directly in the terminal.
+A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
+When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.  
+Standard output (1) is used by `printf()`, standard input (0) is used by `scanf()`.
 
+**Standard input (STDIN, 0)** is the input from the keyboard - or typically what you write in the terminal while a program is running. The program
+*reads* from the input.
+**Standard output (STDOUT, 1)** is the output - which gets printed directly in the terminal. The program *writes* to the output.
+**Standard error (STDERR, 2)** is the error output - which also gets printed directly in the terminal. It is reserved for error messages. The program
+*writes* to the output.
+An example:
+```bash
+int	main()
+{
+	int	x;
+	printf("Enter your age here:");
+	scanf("%i", &x);
+	fprintf(stderr, "You are too old\n");
+}
+```
+Output is "Enter your age". User is prompted to input their name (in the terminal) "You are too old" is written to stderr:
+```bash
+	$> Enter your age: 42
+	$> You are too old
+```
 **Redirecting the file descriptors**
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
