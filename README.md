@@ -80,7 +80,7 @@ An example of how to use it:
 
 **Piping**  
 A pipe `|` can be seen as a one-way communication channel. It has two ends - one for reading
-and one for writing. In the context of two commands, the pipe uses the output of cmd1 as input
+and one for writing. In the context of two commands (e.g. `ls | wc -l`), the pipe uses the output of cmd1 as input
 for cmd2.
 The process can be seen as follows:
 ```bash
