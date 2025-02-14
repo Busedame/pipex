@@ -30,10 +30,10 @@ A file descriptor (fd) makes the operating system able to identify an open file 
 When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.  
 Standard output (1) is used by `printf()`, standard input (0) is used by `scanf()`.
 
-**Standard input (STDIN, 0)** is the input from the keyboard - or typically what you write in the terminal while a program is running. The program
+- **Standard input (STDIN, 0)** is the input from the keyboard - or typically what you write in the terminal while a program is running. The program
 *reads* from the input.  
-**Standard output (STDOUT, 1)** is the output - which gets printed directly in the terminal. The program *writes* to the output.  
-**Standard error (STDERR, 2)** is the error output - which also gets printed directly in the terminal. It is reserved for error messages. The program
+- **Standard output (STDOUT, 1)** is the output - which gets printed directly in the terminal. The program *writes* to the output.  
+- **Standard error (STDERR, 2)** is the error output - which also gets printed directly in the terminal. It is reserved for error messages. The program
 *writes* to the output.  
 An example:
 ```bash
