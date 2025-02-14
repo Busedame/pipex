@@ -99,8 +99,10 @@ If we run this example, it will give us this output:
 
 **Piping**  
 A pipe `|` can be seen as a one-way communication channel between processes. It has two ends - one for reading
-and one for writing. In the context of two commands (e.g. `ls | wc -l`), the pipe uses the output of `ls` as input
-for `wc -l`.  
+and one for writing.  
+In the context of two commands (e.g. `ls | wc -l`): 
+- The pipe uses the *output* of `ls` as *input* for `wc -l`.  
+
 In C, a pipe can be created like this:
 ```bash
 	int	fd[2];
