@@ -78,7 +78,7 @@ An example of how to use it:
 	// Now, file1 has fd(0) instead of fd(3), and the file will be used as input.
 ```
 
-**Piping**
+**Piping**  
 A pipe `|` can be seen as a one-way communication channel. It has two ends - one for reading
 and one for writing.  
 The process can be seen as follows:
