@@ -51,6 +51,7 @@ calling `execve()` in the parent process, we call it in a child process instead,
 running.
 - **Parent process**: The "main" process - which can creates one or more child processes. It controls and monitors them, often waiting for their execution to complete.
 - **Child process**: A process created by a parent process. It is a copy of the parent, but the parent and child have separate memory spaces. Changes (like variables, memory, execution) made in the child process will not affect the parent process.  
+
 Even though the parent and child are running quite independently from one another, there are some exceptions:
 - If they use inter-process communication (IPC) (e.g., signals), they can affect each other.
 - If they share resources (e.g., files, pipes), changes in one process can be visible to both.
