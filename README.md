@@ -87,7 +87,8 @@ The process can be seen as follows:
 	cmd1 ---> fd[1] ---> fd[0] ---> cmd2
 
 	1. Data from cmd1 gets output, and is written into the write-end (fd[1]).
-	2. The data can be read by the read-end (fd[0]), and used as input for cmd2.
+	2. The data can be read by the read-end (fd[0]), it generates
+	an output, which is used as input for cmd2.
 
 	Example:
 	ls | wc -l
