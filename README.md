@@ -40,7 +40,7 @@ The function is declared like this:
 with errno set to indicate the cause of error.  
 
 The catch about `execve()` is that it takes over the whole process. Once we call the function once, our process ends, 
-because a different program takes over. This would have been excellent if we only wanted to execute one command. In
+because a different program takes over. This would have been excellent if we only wanted to execute one command. However in
 the context of Pipex, two commands are getting executed. How can we work around this, when `execve()` takes over the
 whole process?
 
