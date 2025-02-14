@@ -27,7 +27,7 @@ $>  < file1 cmd1 | cmd2 > file2
 - `cmd2` The second command. E.g. "wc -l".
 - `file2` The output file. Where is the output of the program redirected to. It should be the name of the file, e.g. "outfile".
 
-**Running a command in C**  
+**Running a command in C ▶️💻**  
 A shell command is a binary file/an executable, and can essentially be seen as a program. E.g. `cat`, `grep` and `awk` are only a few of many shell commands.  
 When I started working with Pipex, I had a moment of being scared that I would have to recode all the shell commands. I was happy when
 I discovered that this was not the case, and that there is a function that takes care of all of this for you.  
@@ -46,7 +46,7 @@ because a different program takes over. This would have been excellent if we onl
 the context of Pipex, two commands are getting executed. How can we work around this, when `execve()` takes over the
 whole process?
 
-**Child and parent processes**  
+**Child and parent processes 👨‍👧**  
 When a program is ran, it is one process. You can see it as a **parent process/main process**, or whatever you would like
 to call it. In order to avoid that `execve()` takes over our whole program - we can create a **child process**. You can think of it
 as a kind of parallel universe -- the processes are very similar, but will probably do different operations.  
@@ -97,7 +97,7 @@ If we run this example, it will give us this output:
 	This is a child process.   
 ```
 
-**Piping**  
+**Piping 🚰**  
 A pipe `|` can be seen as a one-way communication channel between processes. It has two ends - one for reading
 and one for writing.  
 In the context of two commands (e.g. `ls | wc -l`): 
@@ -125,7 +125,7 @@ The pipe process can be seen as follows:
 	input to count how many lines this consists of, and outputs this.
 ```
 
-**What is a file descriptor?**  
+**What is a file descriptor? 📂**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
 When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.
 By default -- standard output (1) is used by `printf()`, and standard input (0) is used by `scanf()`.
@@ -157,7 +157,7 @@ In C, if you want to open more file descriptors - like a file "test.txt" - it ha
 This function essentially connects the file and the file descriptor.  
 Each opened file will get its unique fd. Since 0, 1 and 2 are reserved for stdin, stdout and stderr - the first opened file will have fd=3, next one fd=4, etc.  
 
-**Redirecting the file descriptors**  
+**Redirecting the file descriptors 🔀**  
 So we know that file descriptors 0, 1 and 2 are already reserved by default, and that if you open a new file, it will be assigned different file descriptor values.
 What if I told you there is a way to *replace* fd 0, 1 and 2 with a file of your choice?
 Redirection involves telling the operating system, "Hey! Instead of reading from the terminal, read from this file instead!". Or "Write everything I print with printf
