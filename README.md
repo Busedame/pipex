@@ -83,7 +83,7 @@ A pipe `|` can be seen as a one-way communication channel. It has two ends - one
 and one for writing.  
 The process can be seen as follows:
 ```bash
-	fd[1] | fd[0]
+	fd[1] ----- fd[0]
 
 	1. Data gets written into the write-end (fd[1]).
 	2. The data can be read by the read-end (fd[0]).
