@@ -94,8 +94,8 @@ The process can be seen as follows:
 	ls | wc -l
 
 	ls -> Writes to fd[1] (A list of the files/directories in the current directory).
-	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as input to
-	count how many lines this consists of, and outputs this.
+	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as 
+	input to count how many lines this consists of, and outputs this.
 ```
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
