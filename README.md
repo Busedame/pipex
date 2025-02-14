@@ -63,7 +63,7 @@ Now, how do we create a child process? This is done by calling the following fun
 ```bash
 	pid_t fork(void);
 ```
-`pid_t`: `fork()` returns the process ID. This is a crucial value, to be able to distinguish between a child and parent process.
+`pid_t`: The process ID. This is a crucial value, to be able to distinguish between a child and parent process.
 As the program moves on after the `fork()` function is called, we most likely don't want the parent and child to do the
 same thing.  
 This is how we can read the return value from `fork()`:
