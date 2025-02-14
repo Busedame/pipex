@@ -1,4 +1,4 @@
-# ➖ **pipex - An introduction to redirections and pipes!**
+# 🔧 **pipex - An introduction to redirections and pipes!**
 
 **In this README:**
 1. Introduction to the project
@@ -24,6 +24,59 @@ $>  < file1 cmd1 | cmd2 > file2
 - `cmd1` The first command. E.g. "cat".
 - `cmd2` The second command. E.g. "wc -l".
 - `file2` The output file. Where is the output of the program redirected to. It should be the name of the file, e.g. "outfile".
+
+**Running a command in C**  
+A shell command is a binary file/an executable, and can essentially be seen as a program.
+`cat`, `grep`, `awk` -- the list of shell commands is definitely long. When I started working with Pipex, I had a moment of
+being scared that I would have to recode all the shell commands. I was happy when I discovered that this was not the case,
+and that there is a function that takes care of all of this for you.  
+The function is declared like this:
+```bash
+	int execve(const char *pathname, char *const argv[], char *const envp[]);
+```
+- `const char *pathname`: The absolute path to the executable/command. E.g. /usr/local/sbin
+- `char *const argv[]`: An array of arguments to the command. E.g. in `ls -l` --> `-l` would be the argument.
+- `char *const envp[]`: An array of the environmental variables (passed as an argument to the main program itself).
+- **Return value**: Does NOT return upon success, because it takes over the current process. Returns -1 upon error,
+with errno set to indicate the cause of error.
+The catch about `execve()` is that it takes over the whole process. Once we call the function once, our process ends, 
+because a different program takes over. This would have been excellent if we only wanted to execute one command. In
+the context of Pipex, two commands are getting executed. How can we work around this, when `execve()` takes over the
+whole process?
+
+**Child and parent processes**
+When a program is ran, it is one process. You can see it as a **parent process/main process**, or whatever you would like
+to call it. In order to avoid that `execve()` takes over our whole program - we can create a **child process**. Instead of
+calling `execve()` in the parent process, we call it in a child process instead, ensuring that our main process continues
+running.
+- **Parent process**: The "main" process - which can creates one or more child processes. It controls and monitors them, often waiting for their execution to complete.
+- **Child process**: A process created by a parent process. It is a copy of the parent, but the parent and child have separate memory spaces. Changes (like variables, memory, execution) made in the child process will not affect the parent process.  
+Even though the parent and child are running quite independently from one another, there are some exceptions:
+- If they use inter-process communication (IPC) (e.g., signals), they can affect each other.
+- If they share resources (e.g., files, pipes), changes in one process can be visible to both.
+
+**Piping**  
+A pipe `|` can be seen as a one-way communication channel between processes. It has two ends - one for reading
+and one for writing. In the context of two commands (e.g. `ls | wc -l`), the pipe uses the output of `ls` as input
+for `wc -l`.
+The process can be seen as follows:
+```bash
+	cmd1 ---> fd[1] ---> fd[0] ---> cmd2
+
+	1. Data from cmd1 gets output, and is written into the write-end (fd[1]).
+	2. The data can be read by the read-end (fd[0]), it generates
+	an output, which is used as input for cmd2.
+
+	Example:
+	ls | wc -l
+
+	ls -> Writes to fd[1] (A list of the files/directories in the current directory).
+	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as 
+	input to count how many lines this consists of, and outputs this.
+```
+A pipe makes communication between two processes possible. However, when you create
+a program in C, there will by default be one process happening. This is unproblematic in
+many cases, but in the context of `pipex`.
 
 **What is a file descriptor?**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
@@ -78,25 +131,6 @@ An example of how to use it:
 	// Now, file1 has fd(0) instead of fd(3), and the file will be used as input.
 ```
 
-**Piping**  
-A pipe `|` can be seen as a one-way communication channel. It has two ends - one for reading
-and one for writing. In the context of two commands (e.g. `ls | wc -l`), the pipe uses the output of `ls` as input
-for `wc -l`.
-The process can be seen as follows:
-```bash
-	cmd1 ---> fd[1] ---> fd[0] ---> cmd2
-
-	1. Data from cmd1 gets output, and is written into the write-end (fd[1]).
-	2. The data can be read by the read-end (fd[0]), it generates
-	an output, which is used as input for cmd2.
-
-	Example:
-	ls | wc -l
-
-	ls -> Writes to fd[1] (A list of the files/directories in the current directory).
-	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as 
-	input to count how many lines this consists of, and outputs this.
-```
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
 of each other. Think of a stack of plates. You would only be able to remove the
