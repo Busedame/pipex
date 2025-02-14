@@ -25,7 +25,7 @@ $>  < file1 cmd1 | cmd2 > file2
 - `cmd2` The second command. E.g. "wc -l".
 - `file2` The output file. Where is the output of the program redirected to. It should be the name of the file, e.g. "outfile".
 
-**What is a file descriptor?**
+**What is a file descriptor?**  
 A file descriptor (fd) makes the operating system able to identify an open file or resource. It is represented by a small positive integer value.
 When a process/program is ran, the standard file descriptors (0, 1, 2) are opened by default.  
 Standard output (1) is used by `printf()`, standard input (0) is used by `scanf()`.
