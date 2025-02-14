@@ -1,4 +1,4 @@
-# 📚🔀📚 **pipex - An introduction to redirections and pipes!**
+# ➖ **pipex - An introduction to redirections and pipes!**
 
 **In this README:**
 1. Introduction to the project
