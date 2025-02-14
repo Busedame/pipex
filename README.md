@@ -80,7 +80,8 @@ An example of how to use it:
 
 **Piping**  
 A pipe `|` can be seen as a one-way communication channel. It has two ends - one for reading
-and one for writing.  
+and one for writing. In the context of two commands, the pipe uses the output of cmd1 as input
+for cmd2.
 The process can be seen as follows:
 ```bash
 	fd[1] ----- fd[0]
@@ -91,8 +92,9 @@ The process can be seen as follows:
 	Example:
 	ls | wc -l
 
-	ls -> Writes a list into fd[1] of the files/directories in the current directory.
-	wc -l -> Reads the output of 'ls' fd[0], and counts how many lines this consists of, and outputs this.
+	ls -> Writes to fd[1] (A list of the files/directories in the current directory).
+	wc -l -> Reads from fd[0] (Which now contains the output of 'ls') Uses this as input to
+	count how many lines this consists of, and outputs this.
 ```
 
 💡 **Note**: A **stack** can be seen as a pile of objects that are stacked on top
