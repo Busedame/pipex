@@ -44,7 +44,7 @@ because a different program takes over. This would have been excellent if we onl
 the context of Pipex, two commands are getting executed. How can we work around this, when `execve()` takes over the
 whole process?
 
-**Child and parent processes**
+**Child and parent processes**  
 When a program is ran, it is one process. You can see it as a **parent process/main process**, or whatever you would like
 to call it. In order to avoid that `execve()` takes over our whole program - we can create a **child process**. Instead of
 calling `execve()` in the parent process, we call it in a child process instead, ensuring that our main process continues
