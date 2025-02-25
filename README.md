@@ -1,14 +1,42 @@
 # 🔧 **pipex - An introduction to redirections and pipes!**
 
 **In this README:**
-1. Introduction to the project
-2. Running a command in C
-3. Child and parent processes
-4. Piping
-5. Redirection
-4. Included files
-5. Cloning the repository
-6. How to compile and run
+1. Included files
+2. Cloning the repository
+3. How to compile and run
+4. Introduction to the project
+5. Running a command in C
+6. Child and parent processes
+7. Piping
+8. Redirection
+
+---
+
+## 🧰 **Included Files**  
+- All source files in directory `src`
+- Two header files in `inc`
+- A Makefile
+
+## 🧑‍💻 **Cloning the Repository**
+
+To get started, first clone the repository.
+This command will clone the repo, and move you to the right directory:
+```bash
+git clone https://github.com/busedame/pipex/ pipex && cd pipex
+```
+
+## 🖥️ **How to Compile and Run**  
+
+1. Compile using this command:
+	```bash
+	make
+	```
+2. Run using this command:
+	```bash
+	./pipex <file1> <cmd1> <cmd2> <file2>
+ 	```
+
+---
 
 ## 🚀 **Project Overview**  
 The project involves redirecting input and output, executing and piping commands.
@@ -179,32 +207,5 @@ An example of how to use it (redirecting input):
 ```
 
 ---
-
-## 🧰 **Included Files**  
-- All source files in directory `src`
-- Two header files in `inc`
-- A Makefile
-
----
-
-## 🧑‍💻 **Cloning the Repository**
-
-To get started, first clone the repository.
-This command will clone the repo, and move you to the right directory:
-```bash
-git clone https://github.com/busedame/pipex/ pipex && cd pipex
-```
----
-
-## 🖥️ **How to Compile and Run**  
-
-1. Compile using this command:
-	```bash
-	make
-	```
-2. Run using this command:
-	```bash
-	./pipex <file1> <cmd1> <cmd2> <file2>
- 	```
 
 *This project was finished March 18th 2024.*
